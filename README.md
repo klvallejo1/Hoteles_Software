@@ -9,9 +9,9 @@ Este repositorio contiene el código fuente y la documentación de un **Sistema 
   
 ## Usuarios involucrados
 
-**klvallejo1:** Kevin Vallejo
-**sonicspeed1:** Bryan Santillán
-**frd2377 :** Freddy Viracocha
+- **klvallejo1:** Kevin Vallejo
+- **sonicspeed1:** Bryan Santillán
+- **frd2377 :** Freddy Viracocha
 
 
 ## Instalación
