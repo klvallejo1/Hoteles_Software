@@ -5,7 +5,8 @@ from app import models
 from app.database import engine
 
 app = FastAPI(
-    title="Hotel Booking API",
+    title="Sistema de Gestión Hotelera",
+    description="API para la gestión de reservas, clientes, habitaciones, facturación y pagos en un hotel.",
     version="1.0.0"
 )
 
