@@ -11,7 +11,8 @@ Este repositorio contiene el código fuente y la documentación de un **Sistema 
 
 - **klvallejo1:** Kevin Vallejo
 - **sonicspeed1:** Bryan Santillán
-- **frd2377 :** Freddy Viracocha
+- **frd2377:** Freddy Viracocha
+- **steven20012500:** Josue Suntaxi
 
 
 ## Instalación
@@ -20,3 +21,15 @@ Este repositorio contiene el código fuente y la documentación de un **Sistema 
    ```bash
    git clone https://github.com/klvallejo1/Hoteles_Software.git
    cd Hoteles_Software
+
+2. Crear entorno python en raíz /
+   ```bash
+   python -m venv env
+
+3. Activar entorno Python
+   ```bash
+   \env\Scripts\activate
+
+4. Instalar dependencias
+   ```bash
+   pip install fastapi uvicorn[standard] sqlalchemy pydantic python-dotenv psycopg2-binary alembic
