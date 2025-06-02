@@ -22,7 +22,7 @@ Este repositorio contiene el código fuente y la documentación de un **Sistema 
    git clone https://github.com/klvallejo1/Hoteles_Software.git
    cd Hoteles_Software
 
-2. Crear entorno python en raíz /
+2. Crear entorno virtual python en raíz /
    ```bash
    python -m venv env
 
@@ -32,4 +32,12 @@ Este repositorio contiene el código fuente y la documentación de un **Sistema 
 
 4. Instalar dependencias
    ```bash
-   pip install fastapi uvicorn[standard] sqlalchemy pydantic python-dotenv psycopg2-binary alembic
+   pip install -r requirements.txt
+
+5. Iniciar la base de datos con Alembic
+   ```bash
+   alembic upgrade head
+
+6. Iniciar la aplicación
+   ```bash
+   uvicorn app.main:app --reload
