@@ -41,3 +41,7 @@ Este repositorio contiene el código fuente y la documentación de un **Sistema 
 6. Iniciar la aplicación
    ```bash
    uvicorn app.main:app --reload
+
+7. Para acceder a la documentación
+   ```bash
+   http://localhost:8000/docs#/
