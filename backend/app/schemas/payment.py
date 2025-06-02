@@ -1,15 +1,16 @@
 from pydantic import BaseModel
 from datetime import date
 
-class InvoiceBase(BaseModel):
-    reservation_id: str
+class PaymentBase(BaseModel):
+    invoice_id: str
+    method: str
+    payment_date: date
     amount: float
-    issue_date: date
 
-class InvoiceCreate(InvoiceBase):
+class PaymentCreate(PaymentBase):
     pass
 
-class InvoiceOut(InvoiceBase):
+class PaymentOut(PaymentBase):
     id: str
 
     class Config:
