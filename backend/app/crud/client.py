@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from app import models, schemas
 
 def create_client(db: Session, client: schemas.client.ClientCreate):
-    db_client = models.client.Client(**client.dict())
+    db_client = models.Client(**client.model_dump())
     db.add(db_client)
     db.commit()
     db.refresh(db_client)
