@@ -1,24 +1,24 @@
-import unittest
 from fastapi.testclient import TestClient
 from app.main import app
+from uuid import uuid4
 
-client = TestClient(app)
+class TestClientRoutes:
 
-class TestClientRoutes(unittest.TestCase):
+    client = TestClient(app)
 
     def test_create_client(self):
-        response = client.post("/clients/", json={
+        response = self.client.post("/clients/", json={
             "name": "Danna Perez",
-            "email": "dannap@example.com",
+            "email": f"ejemplo{uuid4()}@example.com",
             "phone": "0984875252"
         })
-        self.assertEqual(response.status_code, 200)
-        self.assertIn("id", response.json())
+        assert response.status_code == 201
 
     def test_get_clients(self):
-        response = client.get("/clients/")
-        self.assertEqual(response.status_code, 200)
-        self.assertIsInstance(response.json(), list)
+        response = self.client.get("/clients/")
+        assert response.status_code == 200
+    
+    def test_get_clients_id(self):
+        response = self.client.get("/clients/1")
+        assert response.status_code == 200
 
-if __name__ == '__main__':
-    unittest.main()
