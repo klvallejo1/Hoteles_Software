@@ -28,7 +28,7 @@ Este repositorio contiene el código fuente y la documentación de un **Sistema 
 
 3. Activar entorno Python
    ```bash
-   \env\Scripts\activate
+   env\Scripts\activate
 
 4. Instalar dependencias
    ```bash
