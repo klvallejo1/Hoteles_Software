@@ -48,7 +48,7 @@ Este repositorio contiene el código fuente y la documentación de un **Sistema 
 
 8. Realizar las pruebas unitarias
    ```bash
-     pytest
+   pytest
 
 9. Analisis de cobertura
     ```bash
