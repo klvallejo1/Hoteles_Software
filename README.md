@@ -24,7 +24,7 @@ Este repositorio contiene el código fuente y la documentación de un **Sistema 
 
 2. Crear entorno virtual python en raíz /
    ```bash
-   python -m venv env
+   py -m venv env
 
 3. Activar entorno Python
    ```bash
