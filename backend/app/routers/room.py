@@ -32,3 +32,11 @@ def update_room(room_id: int, room: room_schema.RoomCreate, db: Session = Depend
     if not updated_room:
         raise HTTPException(status_code=404, detail="Habitación no encontrada")
     return updated_room
+
+from fastapi import HTTPException
+
+@router.delete("/{room_id}", status_code=204)
+def delete_room(room_id: int, db: Session = Depends(get_db)):
+    deleted = room_crud.delete_room(db, room_id)
+    if not deleted:
+        raise HTTPException(status_code=404, detail="Room not found")

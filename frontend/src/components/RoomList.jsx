@@ -14,6 +14,18 @@ const RoomList = ({ setEditingRoom }) => {
       });
   }, []);
 
+  const handleDelete = async (id) => {
+  if (!window.confirm("¿Estás seguro de eliminar esta habitación?")) return;
+  try {
+    await axios.delete(`http://localhost:8000/rooms/${id}`);
+    setRooms(rooms.filter(room => room.id !== id));
+  } catch (error) {
+    console.error("Error al eliminar habitación:", error);
+    alert("No se pudo eliminar la habitación");
+  }
+};
+
+
   return (
     <div className="max-w-5xl mx-auto mt-10 p-4">
       <h2 className="text-2xl font-bold mb-4 text-center">Habitaciones Disponibles</h2>
@@ -46,6 +58,13 @@ const RoomList = ({ setEditingRoom }) => {
                   >
                     Editar
                   </button>
+                  <button
+                    onClick={() => handleDelete(room.id)}
+                    className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 ml-2"
+                  >
+                    Eliminar
+                  </button>
+
                 </td>
               </tr>
             ))}

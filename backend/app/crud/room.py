@@ -22,3 +22,11 @@ def update_room(db: Session, room_id: int, updated_data: schemas.room.RoomCreate
         db.commit()
         db.refresh(db_room)
     return db_room
+
+def delete_room(db: Session, room_id: int):
+    room = db.query(models.room.Room).filter(models.room.Room.id == room_id).first()
+    if room:
+        db.delete(room)
+        db.commit()
+        return True
+    return False

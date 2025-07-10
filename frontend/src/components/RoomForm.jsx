@@ -8,6 +8,7 @@ const RoomForm = ({ onRoomCreated, editingRoom, setEditingRoom }) => {
     status: 'disponible'
   });
 
+  // Cuando cambia editingRoom, rellenamos el formulario con sus datos
   useEffect(() => {
     if (editingRoom) {
       setFormData({
@@ -26,21 +27,25 @@ const RoomForm = ({ onRoomCreated, editingRoom, setEditingRoom }) => {
     e.preventDefault();
     try {
       if (editingRoom) {
-        // Editar habitación existente
-        await axios.put(`http://localhost:8000/rooms/${editingRoom.id}`, {
+        // PUT para editar habitación
+        const response = await axios.put(`http://localhost:8000/rooms/${editingRoom.id}`, {
           ...formData,
-          rate: parseFloat(formData.rate)
+          rate: parseFloat(formData.rate),
         });
-        setEditingRoom(null); // salir del modo edición
+        console.log('Habitación actualizada:', response.data);
+        setEditingRoom(null); // Salir del modo edición
       } else {
-        // Crear nueva habitación
-        await axios.post('http://localhost:8000/rooms/', {
+        // POST para crear habitación
+        const response = await axios.post('http://localhost:8000/rooms/', {
           ...formData,
-          rate: parseFloat(formData.rate)
+          rate: parseFloat(formData.rate),
         });
+        console.log('Habitación creada:', response.data);
       }
+
       setFormData({ room_type: '', rate: '', status: 'disponible' });
-      onRoomCreated(); // actualizar la lista
+      onRoomCreated(); // Refrescar lista
+
     } catch (error) {
       console.error('Error al guardar habitación:', error);
     }
@@ -87,26 +92,12 @@ const RoomForm = ({ onRoomCreated, editingRoom, setEditingRoom }) => {
             <option value="mantenimiento">Mantenimiento</option>
           </select>
         </div>
-        <div className="flex justify-between">
-          <button
-            type="submit"
-            className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-          >
-            {editingRoom ? 'Guardar Cambios' : 'Crear Habitación'}
-          </button>
-          {editingRoom && (
-            <button
-              type="button"
-              onClick={() => {
-                setEditingRoom(null);
-                setFormData({ room_type: '', rate: '', status: 'disponible' });
-              }}
-              className="bg-gray-400 text-white py-2 px-4 rounded hover:bg-gray-500"
-            >
-              Cancelar
-            </button>
-          )}
-        </div>
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+        >
+          {editingRoom ? 'Guardar Cambios' : 'Crear Habitación'}
+        </button>
       </form>
     </div>
   );
