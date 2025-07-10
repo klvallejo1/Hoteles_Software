@@ -3,11 +3,21 @@ from fastapi import FastAPI
 from app.routers import client, room, reservation, invoice, payment
 from app import models
 from app.database import Base, engine
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     title="Sistema de Gestión Hotelera",
     description="API para la gestión de reservas, clientes, habitaciones, facturación y pagos en un hotel.",
     version="1.0.0"
+)
+
+# CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], 
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 Base.metadata.create_all(bind=engine)
