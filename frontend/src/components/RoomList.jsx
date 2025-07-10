@@ -15,29 +15,31 @@ const RoomList = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Habitaciones Disponibles</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <table border="1" cellPadding="8">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Tipo</th>
-            <th>Tarifa</th>
-            <th>Estado</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rooms.map(room => (
-            <tr key={room.id}>
-              <td>{room.id}</td>
-              <td>{room.room_type}</td>
-              <td>${room.rate}</td>
-              <td>{room.status}</td>
+    <div className="max-w-5xl mx-auto mt-10 p-4">
+      <h2 className="text-2xl font-bold mb-4 text-center">Habitaciones Disponibles</h2>
+      {error && <p className="text-red-500">{error}</p>}
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+          <thead className="bg-blue-500 text-white">
+            <tr>
+              <th className="py-3 px-6 text-left">ID</th>
+              <th className="py-3 px-6 text-left">Tipo</th>
+              <th className="py-3 px-6 text-left">Tarifa</th>
+              <th className="py-3 px-6 text-left">Estado</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody className="text-gray-700">
+            {rooms.map(room => (
+              <tr key={room.id} className="border-b hover:bg-gray-100">
+                <td className="py-3 px-6">{room.id}</td>
+                <td className="py-3 px-6">{room.room_type}</td>
+                <td className="py-3 px-6">${room.rate}</td>
+                <td className="py-3 px-6">{room.status}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
