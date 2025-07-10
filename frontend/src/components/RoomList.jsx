@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const RoomList = () => {
+const RoomList = ({ setEditingRoom }) => {
   const [rooms, setRooms] = useState([]);
   const [error, setError] = useState('');
 
@@ -26,6 +26,7 @@ const RoomList = () => {
               <th className="py-3 px-6 text-left">Tipo</th>
               <th className="py-3 px-6 text-left">Tarifa</th>
               <th className="py-3 px-6 text-left">Estado</th>
+              <th className="py-3 px-6 text-left">Acciones</th>
             </tr>
           </thead>
           <tbody className="text-gray-700">
@@ -35,6 +36,17 @@ const RoomList = () => {
                 <td className="py-3 px-6">{room.room_type}</td>
                 <td className="py-3 px-6">${room.rate}</td>
                 <td className="py-3 px-6">{room.status}</td>
+                <td className="py-3 px-6">
+                  <button
+                    onClick={() => {
+                      setEditingRoom(room);
+                      window.scrollTo(0, 0);
+                    }}
+                    className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+                  >
+                    Editar
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>

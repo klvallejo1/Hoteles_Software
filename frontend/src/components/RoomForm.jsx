@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const RoomForm = ({ onRoomCreated }) => {
+const RoomForm = ({ onRoomCreated, editingRoom, setEditingRoom }) => {
   const [formData, setFormData] = useState({
     room_type: '',
     rate: '',
     status: 'disponible'
   });
+
+  useEffect(() => {
+    if (editingRoom) {
+      setFormData({
+        room_type: editingRoom.room_type,
+        rate: editingRoom.rate,
+        status: editingRoom.status
+      });
+    }
+  }, [editingRoom]);
 
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -15,21 +25,32 @@ const RoomForm = ({ onRoomCreated }) => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/rooms/', {
-        ...formData,
-        rate: parseFloat(formData.rate),
-      });
-      console.log('Habitación creada:', response.data);
+      if (editingRoom) {
+        // Editar habitación existente
+        await axios.put(`http://localhost:8000/rooms/${editingRoom.id}`, {
+          ...formData,
+          rate: parseFloat(formData.rate)
+        });
+        setEditingRoom(null); // salir del modo edición
+      } else {
+        // Crear nueva habitación
+        await axios.post('http://localhost:8000/rooms/', {
+          ...formData,
+          rate: parseFloat(formData.rate)
+        });
+      }
       setFormData({ room_type: '', rate: '', status: 'disponible' });
-      onRoomCreated(); // Para refrescar la lista si se desea
+      onRoomCreated(); // actualizar la lista
     } catch (error) {
-      console.error('Error al crear habitación:', error);
+      console.error('Error al guardar habitación:', error);
     }
   };
 
   return (
     <div className="max-w-md mx-auto mt-10 bg-white shadow-md rounded-lg p-6">
-      <h2 className="text-xl font-semibold mb-4">Registrar Nueva Habitación</h2>
+      <h2 className="text-xl font-semibold mb-4">
+        {editingRoom ? 'Editar Habitación' : 'Registrar Nueva Habitación'}
+      </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-sm font-medium">Tipo de habitación</label>
@@ -66,12 +87,26 @@ const RoomForm = ({ onRoomCreated }) => {
             <option value="mantenimiento">Mantenimiento</option>
           </select>
         </div>
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-        >
-          Crear habitación
-        </button>
+        <div className="flex justify-between">
+          <button
+            type="submit"
+            className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+          >
+            {editingRoom ? 'Guardar Cambios' : 'Crear Habitación'}
+          </button>
+          {editingRoom && (
+            <button
+              type="button"
+              onClick={() => {
+                setEditingRoom(null);
+                setFormData({ room_type: '', rate: '', status: 'disponible' });
+              }}
+              className="bg-gray-400 text-white py-2 px-4 rounded hover:bg-gray-500"
+            >
+              Cancelar
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );

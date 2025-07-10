@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from app.database import SessionLocal
 from app.schemas import room as room_schema
 from app.crud import room as room_crud
+from fastapi import HTTPException
 
 router = APIRouter(prefix="/rooms", tags=["rooms"])
 
@@ -24,3 +25,10 @@ def list_rooms(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 @router.get("/{room_id}", response_model=room_schema.RoomOut)
 def get_room(room_id:int, db: Session = Depends(get_db)):
     return room_crud.get_room(db, room_id)
+
+@router.put("/{room_id}", response_model=room_schema.RoomOut)
+def update_room(room_id: int, room: room_schema.RoomCreate, db: Session = Depends(get_db)):
+    updated_room = room_crud.update_room(db, room_id, room)
+    if not updated_room:
+        raise HTTPException(status_code=404, detail="Habitación no encontrada")
+    return updated_room
