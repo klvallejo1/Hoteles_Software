@@ -1,14 +1,20 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import RoomsList from "./features/rooms/RoomsList";
+import React, { useState } from 'react';
+import RoomList from './components/RoomList';
+import RoomForm from './components/RoomForm';
 
-export default function App() {
+const App = () => {
+  const [refresh, setRefresh] = useState(false);
+
+  const handleRoomCreated = () => {
+    setRefresh(!refresh);
+  };
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/"       element={<h1>Dashboard</h1>} />
-        <Route path="/rooms"  element={<RoomsList />} />
-        {/* aquí irán Clients, Reservations */}
-      </Routes>
-    </BrowserRouter>
+    <div className="bg-gray-100 min-h-screen py-8">
+      <RoomForm onRoomCreated={handleRoomCreated} />
+      <RoomList key={refresh} />
+    </div>
   );
-}
+};
+
+export default App;
