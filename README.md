@@ -6,6 +6,7 @@ Este repositorio contiene el código fuente y la documentación de un **Sistema 
 
 - **Backend:** FastAPI / Python
 - **Base de datos:** PostgreSQL
+- **Frontend:**  React
   
 ## Usuarios involucrados
 
@@ -14,8 +15,7 @@ Este repositorio contiene el código fuente y la documentación de un **Sistema 
 - **frd2377:** Freddy Viracocha
 - **steven20012500:** Josue Suntaxi
 
-
-## Instalación
+## Instalación Backend
 
 1. Clonar el repositorio:
    ```bash
@@ -38,18 +38,25 @@ Este repositorio contiene el código fuente y la documentación de un **Sistema 
    ```bash
    alembic upgrade head
 
-6. Iniciar la aplicación
+6. Iniciar backend
    ```bash
    uvicorn app.main:app --reload
 
-7. Para acceder a la documentación
+
+## Instalación Frontend
+
+1. npm run dev
+
+## Documentación
+
+1. Para acceder a la documentación
    ```bash
    http://localhost:8000/docs#/
 
-8. Realizar las pruebas unitarias
+2. Realizar las pruebas unitarias
    ```bash
    pytest
 
-9. Analisis de cobertura
+3. Analisis de cobertura
     ```bash
    pytest --cov=app --cov-report=html
