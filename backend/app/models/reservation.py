@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, ForeignKey, Date, Enum,Integer
+from sqlalchemy import Column, String, ForeignKey, Date, Enum, Integer, Float
 from sqlalchemy.orm import relationship
 from app.database import Base
 import uuid
@@ -11,6 +11,7 @@ class Reservation(Base):
     start_date = Column(Date, nullable=False)
     end_date = Column(Date, nullable=False)
     status = Column(Enum("pendiente", "confirmada", "activa", "completada", "cancelada", name="reservation_status"), default="pendiente")
+    total_amount = Column(Float, nullable=True)  # Monto total calculado
 
     client = relationship("Client")
     room = relationship("Room")

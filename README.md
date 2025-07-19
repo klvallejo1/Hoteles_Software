@@ -33,7 +33,7 @@ Este repositorio contiene el código fuente y la documentación de un **Sistema 
 4. Instalar dependencias
    ```bash
    pip install -r requirements.txt
-
+   
 5. Iniciar la base de datos con Alembic
    ```bash
    alembic upgrade head
