@@ -15,6 +15,11 @@ Este repositorio contiene el código fuente y la documentación de un **Sistema 
 - **frd2377:** Freddy Viracocha
 - **steven20012500:** Josue Suntaxi
 
+## ANTES DE INICIAR
+1. Instalar todas las dependencias tanto dentro de la carpeta de backend como frontend
+   ```bash
+   npm install
+
 ## Instalación Backend
 
 1. Clonar el repositorio:
@@ -45,7 +50,9 @@ Este repositorio contiene el código fuente y la documentación de un **Sistema 
 
 ## Instalación Frontend
 
-1. npm run dev
+1. Dirigirse a la ruta /frontend y ejecutar
+   ```bash
+   npm run dev
 
 ## Documentación
 
